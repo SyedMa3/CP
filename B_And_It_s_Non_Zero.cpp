@@ -23,10 +23,33 @@ typedef vector<vi> vvi;
 typedef vector<vl> vvl;
 
 const unsigned int M = 1000000007;
+const int N = 1e6;
+int a[N][30];
 
 int main()
 {
     ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+
+    for(int i=1; i<N; ++i)
+    {
+        for(int j=1;j<30; ++j)
+        {
+            if((i>>(j-1))%2 != 0)
+            {
+                a[i][j] = 1;
+            }
+        }
+    }
+
+    for(int i=1; i<30; ++i)
+    {
+        for(int j=1; j<N; ++j)
+        {
+            a[j][i] += a[j-1][i];
+        }
+    }
+
+
 
     int t = 1;
     cin >> t;
@@ -35,23 +58,19 @@ int main()
         int l,r;
         cin >> l >> r;
 
-        int x = ceil(log2(l));
-        x = 1 << x;
+        int ans=-1;
 
-        ll count = 0;
-
-        for(int i=l; i<=r; ++i)
+        for(int i=1; i<30; ++i)
         {
-            if(x&i)
-            {
-                x = x&i;
-                continue;
-            }
-        
-            count++;
+            int temp = a[r][i] - a[l-1][i];
+
+            ans = max(ans, temp);
         }
 
-        cout << count << endl;
+        ans = r-l + 1 - ans;
+
+        cout << ans << endl;
+        
     }
 
     return 0;
