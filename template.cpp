@@ -4,6 +4,7 @@ using namespace std;
 #define PI 3.1415926535897932384626
 #define rep(n) for (int i = 0; i < n; ++i)
 #define repc(i, n) for (ll i = 0; i < n; i++)
+#define fore(i,x1,x2) for(ll i=x1; i<x2; ++i)
 #define pb push_back
 #define mp make_pair
 #define F first
